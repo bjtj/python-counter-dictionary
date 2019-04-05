@@ -3,6 +3,8 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
+import math
+
 
 class CounterDictionary:
 
@@ -54,11 +56,53 @@ class CounterDictionary:
         return self._table.items()
 
 
+    def max(self):
+        m = 0
+        mk = None
+        for k, v in self._table.items():
+            if v > m:
+                m = v
+                mk = k
+        return (mk, m)
+
+
+    def min(self):
+        first = True
+        m = 0
+        mk = None
+        for k, v in self._table.items():
+            if first:
+                first = False
+                m = v
+                mk = k
+            elif v < m:
+                m = v
+                mk = k
+        return (mk, m)
+
+    
+    def _square(self, x):
+        return x * x
+
+    
+    def _sum(self, vals):
+        ret = 0
+        for val in vals:
+            ret += val
+        return ret
+
+
+    def stdev(self):
+        vals = list(self.values())
+        avg = self.sum() / len(vals)
+        return math.sqrt(self._sum([self._square(x - avg) for x in vals]) / len(vals))
+
+
     def __str__(self):
         lst = []
         for k,v in self._table.items():
             lst.append('{}: {}'.format(k, v))
         if not lst:
-            return '(empty)'
+            return '(Empty)'
 
         return ', '.join(lst)

@@ -4,7 +4,7 @@ with open('README.md', 'r') as fh:
     long_description = fh.read()
 
 setuptools.setup(name='pycountdict',
-                 version='1.0.2',
+                 version='1.0.3',
                  author='bjtj',
                  author_email='bjtj10@gmail.com',
                  description='python counter dictionary',
