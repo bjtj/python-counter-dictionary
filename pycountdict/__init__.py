@@ -10,6 +10,10 @@ class CounterDictionary:
         self._table = {}
 
 
+    def putlist(self, lst):
+        for i in lst:
+            self[i] = 1
+
     def __getitem__(self, key):
         return self._table[key]
 
@@ -24,7 +28,14 @@ class CounterDictionary:
         del self._table[key]
 
 
+    def clear(self):
+        self.table = {}
+
+
     def sum(self, *keys):
+        if not keys:
+            keys = self._table.keys()
+
         ret = 0
         for key in keys:
             ret += self._table[key]
@@ -47,4 +58,7 @@ class CounterDictionary:
         lst = []
         for k,v in self._table.items():
             lst.append('{}: {}'.format(k, v))
+        if not lst:
+            return '(empty)'
+
         return ', '.join(lst)
